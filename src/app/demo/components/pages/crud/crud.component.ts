@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/demo/api/product';
+import { Pet } from '../../../../demo/api/pet.model';
 import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
-import { ProductService } from 'src/app/demo/service/product.service';
+import { PetService } from '../../../../demo/service/pet.service';
 
 @Component({
     templateUrl: './crud.component.html',
@@ -10,17 +10,17 @@ import { ProductService } from 'src/app/demo/service/product.service';
 })
 export class CrudComponent implements OnInit {
 
-    productDialog: boolean = false;
+    petDialog: boolean = false;
 
-    deleteProductDialog: boolean = false;
+    deletePetDialog: boolean = false;
 
-    deleteProductsDialog: boolean = false;
+    deletePetsDialog: boolean = false;
 
-    products: Product[] = [];
+    pets: Pet[] = [];
 
-    product: Product = {};
+    pet: Pet = {};
 
-    selectedProducts: Product[] = [];
+    selectedPets: Pet[] = [];
 
     submitted: boolean = false;
 
@@ -30,13 +30,13 @@ export class CrudComponent implements OnInit {
 
     rowsPerPageOptions = [5, 10, 20];
 
-    constructor(private productService: ProductService, private messageService: MessageService) { }
+    constructor(private petService: PetService, private messageService: MessageService) { }
 
     ngOnInit() {
-        this.productService.getProducts().then(data => this.products = data);
+        this.petService.getPets().subscribe(data => this.pets = data);
 
         this.cols = [
-            { field: 'product', header: 'Product' },
+            { field: 'pet', header: 'Pet' },
             { field: 'price', header: 'Price' },
             { field: 'category', header: 'Category' },
             { field: 'rating', header: 'Reviews' },
@@ -51,73 +51,71 @@ export class CrudComponent implements OnInit {
     }
 
     openNew() {
-        this.product = {};
+        this.pet = {};
         this.submitted = false;
-        this.productDialog = true;
+        this.petDialog = true;
     }
 
-    deleteSelectedProducts() {
-        this.deleteProductsDialog = true;
+    deleteSelectedPets() {
+        this.deletePetsDialog = true;
     }
 
-    editProduct(product: Product) {
-        this.product = { ...product };
-        this.productDialog = true;
+    editPet(pet: Pet) {
+        this.pet = { ...pet };
+        this.petDialog = true;
     }
 
-    deleteProduct(product: Product) {
-        this.deleteProductDialog = true;
-        this.product = { ...product };
+    deletePet(pet: Pet) {
+        this.deletePetDialog = true;
+        this.pet = { ...pet };
     }
 
     confirmDeleteSelected() {
-        this.deleteProductsDialog = false;
-        this.products = this.products.filter(val => !this.selectedProducts.includes(val));
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
-        this.selectedProducts = [];
+        this.deletePetsDialog = false;
+        this.pets = this.pets.filter(val => !this.selectedPets.includes(val));
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Pets Deleted', life: 3000 });
+        this.selectedPets = [];
     }
 
     confirmDelete() {
-        this.deleteProductDialog = false;
-        this.products = this.products.filter(val => val.id !== this.product.id);
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
-        this.product = {};
+        this.deletePetDialog = false;
+        this.pets = this.pets.filter(val => val.id !== this.pet.id);
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Pet Deleted', life: 3000 });
+        this.pet = {};
     }
 
     hideDialog() {
-        this.productDialog = false;
+        this.petDialog = false;
         this.submitted = false;
     }
 
-    saveProduct() {
+    savePet() {
         this.submitted = true;
 
-        if (this.product.name?.trim()) {
-            if (this.product.id) {
+        if (this.pet.name?.trim()) {
+            if (this.pet.id) {
                 // @ts-ignore
-                this.product.inventoryStatus = this.product.inventoryStatus.value ? this.product.inventoryStatus.value : this.product.inventoryStatus;
-                this.products[this.findIndexById(this.product.id)] = this.product;
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
+                this.pet.inventoryStatus = this.pet.inventoryStatus.value ? this.pet.inventoryStatus.value : this.pet.inventoryStatus;
+                this.pets[this.findIndexById(this.pet.id)] = this.pet;
+                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Pet Updated', life: 3000 });
             } else {
-                this.product.id = this.createId();
-                this.product.code = this.createId();
-                this.product.image = 'product-placeholder.svg';
+                this.petService.createPet(this.pet);
                 // @ts-ignore
-                this.product.inventoryStatus = this.product.inventoryStatus ? this.product.inventoryStatus.value : 'INSTOCK';
-                this.products.push(this.product);
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
+                this.pet.inventoryStatus = this.pet.inventoryStatus ? this.pet.inventoryStatus.value : 'INSTOCK';
+                this.pets.push(this.pet);
+                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Pet Created', life: 3000 });
             }
 
-            this.products = [...this.products];
-            this.productDialog = false;
-            this.product = {};
+            this.pets = [...this.pets];
+            this.petDialog = false;
+            this.pet = {};
         }
     }
 
     findIndexById(id: string): number {
         let index = -1;
-        for (let i = 0; i < this.products.length; i++) {
-            if (this.products[i].id === id) {
+        for (let i = 0; i < this.pets.length; i++) {
+            if (this.pets[i].id === id) {
                 index = i;
                 break;
             }

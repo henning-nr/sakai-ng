@@ -24,7 +24,7 @@ import { environment } from '../environments/environment';
         AppRoutingModule,
         AppLayoutModule,
         AngularFireModule.initializeApp(environment.firebaseConfig),
-        AngularFireDatabaseModule
+        AngularFireDatabaseModule,
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
