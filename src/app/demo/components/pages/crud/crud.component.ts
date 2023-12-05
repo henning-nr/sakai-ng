@@ -36,7 +36,7 @@ export class CrudComponent implements OnInit {
         this.petService.getPets().subscribe(data => this.pets = data);
 
         this.cols = [
-            { field: 'pet', header: 'Pet' },
+            { field: 'product', header: 'Pet' },
             { field: 'price', header: 'Price' },
             { field: 'category', header: 'Category' },
             { field: 'rating', header: 'Reviews' },
@@ -48,6 +48,7 @@ export class CrudComponent implements OnInit {
             { label: 'LOWSTOCK', value: 'lowstock' },
             { label: 'OUTOFSTOCK', value: 'outofstock' }
         ];
+
     }
 
     openNew() {
@@ -66,20 +67,23 @@ export class CrudComponent implements OnInit {
     }
 
     deletePet(pet: Pet) {
-        this.deletePetDialog = true;
+        this.deletePetsDialog = true;
         this.pet = { ...pet };
     }
 
     confirmDeleteSelected() {
         this.deletePetsDialog = false;
-        this.pets = this.pets.filter(val => !this.selectedPets.includes(val));
+        this.petService.deletePet(this.pet.key);
+        // this.pets = this.pets.filter(val => !this.selectedPets.includes(val));
+
         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Pets Deleted', life: 3000 });
         this.selectedPets = [];
     }
 
     confirmDelete() {
         this.deletePetDialog = false;
-        this.pets = this.pets.filter(val => val.id !== this.pet.id);
+        // this.pets = this.pets.filter(val => val.id !== this.pet.id);
+        this.petService.deletePet(this.pet.key);
         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Pet Deleted', life: 3000 });
         this.pet = {};
     }
@@ -96,13 +100,15 @@ export class CrudComponent implements OnInit {
             if (this.pet.id) {
                 // @ts-ignore
                 this.pet.inventoryStatus = this.pet.inventoryStatus.value ? this.pet.inventoryStatus.value : this.pet.inventoryStatus;
-                this.pets[this.findIndexById(this.pet.id)] = this.pet;
+                // this.pets[this.findIndexById(this.pet.id)] = this.pet;
+                this.petService.updatePet(this.pet.key, this.pet);
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Pet Updated', life: 3000 });
             } else {
+                this.pet.id = this.createId();
                 this.petService.createPet(this.pet);
                 // @ts-ignore
                 this.pet.inventoryStatus = this.pet.inventoryStatus ? this.pet.inventoryStatus.value : 'INSTOCK';
-                this.pets.push(this.pet);
+                // this.products.push(this.product);
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Pet Created', life: 3000 });
             }
 

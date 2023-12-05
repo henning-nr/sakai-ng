@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
     providedIn: 'root',
 })
 export class PetService {
-    private basePath = "pets"
+    private basePath = "products"
 
     constructor(private db: AngularFireDatabase) { }
 

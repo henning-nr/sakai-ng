@@ -5,6 +5,7 @@ interface InventoryStatus {
 
 export interface Pet {
     id?: string;
+    key?: string;
     code?: string;
     name?: string;
     description?: string;

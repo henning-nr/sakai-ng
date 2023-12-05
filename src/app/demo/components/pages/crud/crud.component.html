@@ -5,8 +5,8 @@
             <p-toolbar styleClass="mb-4">
                 <ng-template pTemplate="left">
                     <div class="my-2">
-                        <button pButton pRipple label="Novo" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
-                        <button pButton pRipple label="Deletar" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedPets()" [disabled]="!selectedPets || !selectedPets.length"></button>
+                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+                        <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedPets()" [disabled]="!selectedPets || !selectedPets.length"></button>
                     </div>
                 </ng-template>
 
@@ -19,7 +19,7 @@
             <p-table #dt [value]="pets" [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['name','country.name','representative.name','status']" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedPets" selectionMode="multiple" [rowHover]="true" dataKey="id">
                 <ng-template pTemplate="caption">
                     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                        <h5 class="m-0">Manage Pets</h5>
+                        <h5 class="m-0">Manage Products</h5>
                         <span class="block mt-2 md:mt-0 p-input-icon-left">
                             <i class="pi pi-search"></i>
                             <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
@@ -41,7 +41,7 @@
                         <th></th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-product>
+                <ng-template pTemplate="body" let-pet>
                     <tr>
                         <td>
                             <p-tableCheckbox [value]="pet"></p-tableCheckbox>
@@ -68,7 +68,7 @@
                             <p-rating [ngModel]="pet.rating" [readonly]="true" [cancel]="false"></p-rating>
                         </td>
                         <td style="width:14%; min-width: 10rem;"><span class="p-column-title">Status</span>
-                            <span [class]="'product-badge status-' + (pet.inventoryStatus ? pet.inventoryStatus.toLowerCase() : '')">{{pet.inventoryStatus}}</span>
+                            <span [class]="'pet-badge status-' + (pet.inventoryStatus ? pet.inventoryStatus.toLowerCase() : '')">{{pet.inventoryStatus}}</span>
                         </td>
                         <td>
                             <div class="flex">
@@ -81,7 +81,7 @@
             </p-table>
         </div>
 
-        <p-dialog [(visible)]="petDialog" [style]="{width: '450px'}" header="Pet Details" [modal]="true" class="p-fluid">
+        <p-dialog [(visible)]="petDialog" [style]="{width: '450px'}" header="Product Details" [modal]="true" class="p-fluid">
             <ng-template pTemplate="content">
                 <img [src]="'assets/demo/images/product/' + pet.image" [alt]="pet.image" width="150" class="mt-0 mx-auto mb-5 block shadow-2" *ngIf="pet.image">
                 <div class="field">
