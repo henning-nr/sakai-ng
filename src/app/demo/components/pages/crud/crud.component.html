@@ -41,39 +41,39 @@
                         <th></th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-product>
+                <ng-template pTemplate="body" let-pet>
                     <tr>
                         <td>
                             <p-tableCheckbox [value]="pet"></p-tableCheckbox>
                         </td>
                         <td style="width:14%; min-width:10rem;"><span class="p-column-title">Code</span>
-                            {{product.code || product.id}}
+                            {{pet.code || pet.id}}
                         </td>
                         <td style="width:14%; min-width:10rem;">
                             <span class="p-column-title">Name</span>
-                            {{product.name}}
+                            {{pet.name}}
                         </td>
                         <td style="width:14%; min-width:10rem;"><span class="p-column-title">Image</span>
                             <!-- <img [src]="'assets/demo/images/product/' + pet.image" [alt]="pet.name" width="100" class="shadow-4" /> -->
                         </td>
                         <td style="width:14%; min-width:8rem;">
                             <span class="p-column-title">Price</span>
-                            {{product.price | currency:'USD'}}
+                            {{pet.price | currency:'USD'}}
                         </td>
                         <td style="width:14%; min-width:10rem;">
                             <span class="p-column-title">Category</span>
-                            {{product.category}}
+                            {{pet.category}}
                         </td>
                         <td style="width:14%; min-width: 10rem;"><span class="p-column-title">Reviews</span>
                             <p-rating [ngModel]="pet.rating" [readonly]="true" [cancel]="false"></p-rating>
                         </td>
                         <td style="width:14%; min-width: 10rem;"><span class="p-column-title">Status</span>
-                            <span [class]="'product-badge status-' + (pet.inventoryStatus ? pet.inventoryStatus.toLowerCase() : '')">{{product.inventoryStatus}}</span>
+                            <span [class]="'product-badge status-' + (pet.inventoryStatus ? pet.inventoryStatus.toLowerCase() : '')">{{pet.inventoryStatus}}</span>
                         </td>
                         <td>
                             <div class="flex">
-                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editPet(product)"></button>
-                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deletePet(product)"></button>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editPet(pet)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deletePet(pet)"></button>
                             </div>
                         </td>
                     </tr>
