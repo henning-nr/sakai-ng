@@ -81,11 +81,12 @@
             </p-table>
         </div>
 
+        <!-- ==================================== FORM  ========================================================================-->
         <p-dialog [(visible)]="petDialog" [style]="{width: '450px'}" header="Product Details" [modal]="true" class="p-fluid">
             <ng-template pTemplate="content">
                 <img [src]="'assets/demo/images/product/' + pet.image" [alt]="pet.image" width="150" class="mt-0 mx-auto mb-5 block shadow-2" *ngIf="pet.image">
                 <div class="field">
-                    <label for="name">Name</label>
+                    <label for="name">Nome</label>
                     <input type="text" pInputText id="name" [(ngModel)]="pet.name" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !pet.name}"/>
                     <small class="ng-dirty ng-invalid" *ngIf="submitted && !pet.name">Name is required.</small>
                 </div>
