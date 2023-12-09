@@ -67,7 +67,7 @@ export class CrudComponent implements OnInit {
     confirmDeleteSelected() {
         this.deletePetsDialog = false;
         this.petService.deletePet(this.pet.key);
-        // this.pets = this.pets.filter(val => !this.selectedPets.includes(val));
+        // this.pets = this.pets.filter(val => !this.petService.deletePet(val.key));
 
         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Pets Deleted', life: 3000 });
         this.selectedPets = [];
