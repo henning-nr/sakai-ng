@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Pet } from '../../../../demo/api/pet';
+import { Client } from '../../../api/client';
 import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
-import { PetService } from '../../../../demo/service/pet.service';
-import { ThirdPartyDraggable } from '@fullcalendar/interaction';
+import { ClientService } from '../../../service/client.service';
 
 @Component({
     templateUrl: './crud.component.html',
@@ -11,134 +10,138 @@ import { ThirdPartyDraggable } from '@fullcalendar/interaction';
 })
 export class CrudComponent implements OnInit, OnDestroy {
 
-    petDialog: boolean = false;
+    clientDialog: boolean = false;
 
-    deletePetDialog: boolean = false;
+    deleteClientDialog: boolean = false;
 
-    deletePetsDialog: boolean = false;
+    deleteClientsDialog: boolean = false;
 
-    petSubscribe: Pet;
+    clientSubscribe: Client;
 
-    pets: Pet[] = [];
+    clients: Client[] = [];
 
-    pet: Pet = {};
+    client: Client = {};
 
-    selectedPets: Pet[] = [];
+    selectedClients: Client[] = [];
 
     submitted: boolean = false;
 
     cols: any[] = [];
 
-    statuses: any[] = [];
+    sexo: any[] = [];
 
     rowsPerPageOptions = [5, 10, 20];
 
-    constructor(private productService: PetService, private messageService: MessageService) { }
+    constructor(private clientService: ClientService, private messageService: MessageService) { }
 
     ngOnInit() {
 
-        this.productService.getPets().subscribe(data => {
-            this.pets = data;
+        this.clientService.getClients().subscribe(data => {
+            this.clients = data;
         });
-        // console.log(this.productService.getPets())
+        // console.log(this.clientService.getPets())
 
         this.cols = [
-            { field: 'product', header: 'Product' },
-            { field: 'price', header: 'Price' },
-            { field: 'category', header: 'Category' },
-            { field: 'rating', header: 'Reviews' },
-            { field: 'inventoryStatus', header: 'Status' }
+            { field: 'nome', header: 'Nome' },
+            { field: 'rua', header: 'Rua' },
+            { field: 'bairro', header: 'Bairro' },
+            { field: 'numero', header: 'Numero' },
+            { field: 'cidade', header: 'Cidade' },
+            { field: 'cep', header: 'CEP' },
+            { field: 'estado', header: 'Estado' },
+            { field: 'telefone', header: 'Telefone' },
+            { field: 'cpf', header: 'CPF' },
+            { field: 'sexos', header: 'Sexo' },
         ];
 
-        this.statuses = [
-            { label: 'INSTOCK', value: 'instock' },
-            { label: 'LOWSTOCK', value: 'lowstock' },
-            { label: 'OUTOFSTOCK', value: 'outofstock' }
+        this.sexo = [
+            { label: 'MASCULINO', value: 'masculino' },
+            { label: 'FEMININO', value: 'feminino' },
+            { label: 'OUTRO', value: 'outro' },
         ];
     }
 
     openNew() {
-        this.pet = {};
+        this.client = {};
         this.submitted = false;
-        this.petDialog = true;
+        this.clientDialog = true;
     }
 
-    deleteSelectedPets() {
-        console.log(this.selectedPets)
-        this.deletePetsDialog = true;
+    deleteSelectedClients() {
+        console.log(this.selectedClients)
+        this.deleteClientsDialog = true;
     }
 
-    editPet(pet: Pet) {
-        this.pet = { ...pet };
-        this.petDialog = true;
+    editClient(client: Client) {
+        this.client = { ...client };
+        this.clientDialog = true;
     }
 
-    deletePet(pet: Pet) {
-        this.deletePetDialog = true;
-        this.pet = { ...pet };
-        console.log("Deletando " + this.pet.key);
+    deleteClient(client: Client) {
+        this.deleteClientDialog = true;
+        this.client = { ...client };
+        console.log("Deletando " + this.client.key);
     }
 
 
     confirmDeleteSelected() {
-        console.log("confirmDeleteSelected")
-        this.deletePetsDialog = false;
-        this.pets = this.pets.filter(val => !this.selectedPets.includes(val));
-        for(let i = 0; i++; i < this.selectedPets.length){
-            const key = this.selectedPets[i].key;
-            this.productService.deletePet(key);
+        console.log("confirmDeleteSelected");
+        this.deleteClientsDialog = false;
+        this.clients = this.clients.filter(val => !this.selectedClients.includes(val));
+        for(let i = 0; i < this.selectedClients.length; i++){
+            const key = this.selectedClients[i].key;
+            this.clientService.deleteClient(key);
         }
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
-        console.log(this.pets)
-        this.selectedPets = [];
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Clients Deleted', life: 3000 });
+        console.log(this.clients)
+        this.selectedClients = [];
     }
 
     confirmDelete() {
         console.log("confirmDelete")
-        this.productService.deletePet(this.pet.key);
-        this.deletePetDialog = false;
-        this.pets = this.pets.filter(val => val.id !== this.pet.id);
+        this.clientService.deleteClient(this.client.key);
+        this.deleteClientDialog = false;
+        this.clients = this.clients.filter(val => val.key !== this.client.key);
         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
-        this.pet = {};
-        console.log(this.pets)
+        this.client = {};
+        console.log(this.clients)
     }
 
     hideDialog() {
-        this.petDialog = false;
+        this.clientDialog = false;
         this.submitted = false;
     }
 
-    savePet() {
+    saveClient() {
         this.submitted = true;
 
-        if (this.pet.name?.trim()) {
-            if (this.pet.id) {
+        if (this.client.nome?.trim()) {
+            if (this.client.id) {
                 console.log("alterado")
                 // @ts-ignore
-                this.pet.inventoryStatus = this.pet.inventoryStatus.value ? this.pet.inventoryStatus.value : this.pet.inventoryStatus;
-                // this.pets[this.findIndexById(this.pet.id)] = this.pet;
-                this.productService.updatePet(this.pet.key, this.pet);
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Pet Updated', life: 3000 });
+                this.client.sexo = this.client.sexo.value ? this.client.sexo.value : this.client.sexo;
+                this.clientService.updateClient(this.client.key, this.client);
+                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Client Updated', life: 3000 });
             } else {
                 console.log("inserido")
-                this.pet.id = this.createId();
-                this.pet.code = this.createId();
-                this.productService.createPet(this.pet);
+                this.client.id = this.createId();
+                this.clientService.createClient(this.client);   
+                console.log("this.client", this.client);
                 // @ts-ignore
-                this.pet.inventoryStatus = this.pet.inventoryStatus ? this.pet.inventoryStatus.value : 'INSTOCK';
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Pet Created', life: 3000 });
+                this.client.sexo = this.client.sexo ? this.client.sexo.value : 'OUTRO';
+                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Client Created', life: 3000 });
             }
 
-            this.pets = [...this.pets];
-            this.petDialog = false;
-            this.pet = {};
+            this.clients = [...this.clients];
+            this.clientDialog = false;
+            this.client = {};
         }
     }
 
     findIndexById(id: string): number {
         let index = -1;
-        for (let i = 0; i < this.pets.length; i++) {
-            if (this.pets[i].id === id) {
+        for (let i = 0; i < this.clients.length; i++) {
+            if (this.clients[i].key === id) {
                 index = i;
                 break;
             }
@@ -161,7 +164,7 @@ export class CrudComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(){
-        this.pets = []
-        this.selectedPets = []
+        this.clients = []
+        this.selectedClients = []
     }
 }

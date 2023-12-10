@@ -6,7 +6,7 @@
                 <ng-template pTemplate="left">
                     <div class="my-2">
                         <button pButton pRipple label="Novo" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
-                        <button pButton pRipple label="Deletar" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedPets()" [disabled]="!selectedPets || !selectedPets.length"></button>
+                        <button pButton pRipple label="Deletar" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedClients()" [disabled]="!selectedClients || !selectedClients.length"></button>
                     </div>
                 </ng-template>
 
@@ -16,10 +16,10 @@
                 </ng-template>
             </p-toolbar>
 
-            <p-table #dt [value]="pets" [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['name','country.name','representative.name','status']" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedPets" selectionMode="multiple" [rowHover]="true" dataKey="id">
+            <p-table #dt [value]="clients" [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['name','country.name','representative.name','status']" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedClients" selectionMode="multiple" [rowHover]="true" dataKey="id">
                 <ng-template pTemplate="caption">
                     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                        <h5 class="m-0">Manage Pets</h5>
+                        <h5 class="m-0">Clientes</h5>
                         <span class="block mt-2 md:mt-0 p-input-icon-left">
                             <i class="pi pi-search"></i>
                             <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
@@ -31,49 +31,67 @@
                         <th style="width: 3rem">
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
-                        <th pSortableColumn="code">Code <p-sortIcon field="code"></p-sortIcon></th>
-                        <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
-                        <th>Image</th>
-                        <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
-                        <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon></th>
-                        <th pSortableColumn="rating">Reviews <p-sortIcon field="rating"></p-sortIcon></th>
-                        <th pSortableColumn="inventoryStatus">Status <p-sortIcon field="inventoryStatus"></p-sortIcon></th>
+                        <th pSortableColumn="nome">Nome <p-sortIcon field="nome"></p-sortIcon></th>
+                        <th pSortableColumn="rua">Rua <p-sortIcon field="rua"></p-sortIcon></th>
+                        <th pSortableColumn="bairro">Bairro <p-sortIcon field="bairro"></p-sortIcon></th>
+                        <th pSortableColumn="numero">Número <p-sortIcon field="numero"></p-sortIcon></th>
+                        <th pSortableColumn="cidade">Cidade <p-sortIcon field="cidade"></p-sortIcon></th>
+                        <th pSortableColumn="cep">CEP <p-sortIcon field="cep"></p-sortIcon></th>
+                        <th pSortableColumn="estado">Estado <p-sortIcon field="estado"></p-sortIcon></th>
+                        <th pSortableColumn="telefone">Telefone <p-sortIcon field="telefone"></p-sortIcon></th>
+                        <th pSortableColumn="cpf">CPF <p-sortIcon field="cpf"></p-sortIcon></th>
+                        <th pSortableColumn="sexo">Sexo <p-sortIcon field="sexo"></p-sortIcon></th>
                         <th></th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-pet>
+                <ng-template pTemplate="body" let-client>
                     <tr>
                         <td>
-                            <p-tableCheckbox [value]="pet"></p-tableCheckbox>
-                        </td>
-                        <td style="width:14%; min-width:10rem;"><span class="p-column-title">Code</span>
-                            {{pet.code || pet.id}}
+                            <p-tableCheckbox [value]="client"></p-tableCheckbox>
                         </td>
                         <td style="width:14%; min-width:10rem;">
-                            <span class="p-column-title">Name</span>
-                            {{pet.name}}
-                        </td>
-                        <td style="width:14%; min-width:10rem;"><span class="p-column-title">Image</span>
-                            <!-- <img [src]="'assets/demo/images/product/' + pet.image" [alt]="pet.name" width="100" class="shadow-4" /> -->
+                            <span class="p-column-title">Nome</span>
+                            {{client.nome}}
                         </td>
                         <td style="width:14%; min-width:8rem;">
-                            <span class="p-column-title">Price</span>
-                            {{pet.price | currency:'USD'}}
+                            <span class="p-column-title">Rua</span>
+                            {{client.rua}}
                         </td>
                         <td style="width:14%; min-width:10rem;">
-                            <span class="p-column-title">Category</span>
-                            {{pet.category}}
+                            <span class="p-column-title">Bairro</span>
+                            {{client.bairro}}
                         </td>
-                        <td style="width:14%; min-width: 10rem;"><span class="p-column-title">Reviews</span>
-                            <p-rating [ngModel]="pet.rating" [readonly]="true" [cancel]="false"></p-rating>
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">Número</span>
+                            {{client.numero}}
                         </td>
-                        <td style="width:14%; min-width: 10rem;"><span class="p-column-title">Status</span>
-                            <span [class]="'product-badge status-' + (pet.inventoryStatus ? pet.inventoryStatus.toLowerCase() : '')">{{pet.inventoryStatus}}</span>
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">Cidade</span>
+                            {{client.cidade}}
+                        </td>
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">Cep</span>
+                            {{client.cep}}
+                        </td>
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">Estado</span>
+                            {{client.estado}}
+                        </td>
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">Telefone</span>
+                            {{client.telefone}}
+                        </td>
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">CPF</span>
+                            {{client.cpf}}
+                        </td>
+                        <td style="width:14%; min-width: 10rem;"><span class="p-column-title">Sexo</span>
+                            <span [class]="'product-badge sexo-' + (client.sexo ? client.sexo.toLowerCase() : '')">{{client.sexo}}</span>
                         </td>
                         <td>
                             <div class="flex">
-                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editPet(pet)"></button>
-                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deletePet(pet)"></button>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editClient(client)"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteClient(client)"></button>
                             </div>
                         </td>
                     </tr>
@@ -81,88 +99,89 @@
             </p-table>
         </div>
 
-        <p-dialog [(visible)]="petDialog" [style]="{width: '450px'}" header="Product Details" [modal]="true" class="p-fluid">
+        <p-dialog [(visible)]="clientDialog" [style]="{width: '450px'}" header="Cadastrar Cliente" [modal]="true" class="p-fluid">
             <ng-template pTemplate="content">
-                <img [src]="'assets/demo/images/product/' + pet.image" [alt]="pet.image" width="150" class="mt-0 mx-auto mb-5 block shadow-2" *ngIf="pet.image">
                 <div class="field">
-                    <label for="name">Name</label>
-                    <input type="text" pInputText id="name" [(ngModel)]="pet.name" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !pet.name}"/>
-                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !pet.name">Name is required.</small>
+                    <label for="nome">Nome</label>
+                    <input type="text" pInputText id="nome" [(ngModel)]="client.nome" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.nome}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.nome">Nome is required.</small>
                 </div>
                 <div class="field">
-                    <label for="description">Description</label>
-                    <textarea id="description" pInputTextarea [(ngModel)]="pet.description" required rows="3" cols="20"></textarea>
+                    <label for="cpf">CPF</label>
+                    <p-inputMask id="cep" mask="999.999.999-99" [(ngModel)]="client.cpf" [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.cpf}"></p-inputMask>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.cpf">CPF is required.</small>
                 </div>
                 <div class="field">
-                    <label for="status">Inventory Status</label>
-                    <p-dropdown [(ngModel)]="pet.inventoryStatus" inputId="inventoryStatus" optionValue="label" [options]="statuses" placeholder="Select">
+                    <label for="sexo">Sexo</label>
+                    <p-dropdown [(ngModel)]="client.sexo" inputId="sexo" optionValue="label" [options]="sexo" placeholder="Sexo">
                         <ng-template pTemplate="selectedItem">
-                            <span *ngIf="pet && pet.inventoryStatus" [class]="'product-badge status-' + pet.inventoryStatus.toString().toLowerCase()">{{pet.inventoryStatus}}</span>
+                            <span *ngIf="client && client.sexo" [class]="'product-badge sexo-' + client.sexo.toString().toLowerCase()">{{client.sexo}}</span>
                         </ng-template>
                         <ng-template let-option pTemplate="item">
-                            <span [class]="'product-badge status-' + option.value">{{option.label}}</span>
+                            <span [class]="'product-badge sexo-' + option.value">{{option.label}}</span>
                         </ng-template>
                     </p-dropdown>
                 </div>
-
                 <div class="field">
-                    <label class="mb-3">Category</label>
-                    <div class="formgrid grid">
-                        <div class="field-radiobutton col-6">
-                            <p-radioButton id="category1" name="category" value="Accessories" [(ngModel)]="pet.category"></p-radioButton>
-                            <label for="category1">Accessories</label>
-                        </div>
-                        <div class="field-radiobutton col-6">
-                            <p-radioButton id="category2" name="category" value="Clothing" [(ngModel)]="pet.category"></p-radioButton>
-                            <label for="category2">Clothing</label>
-                        </div>
-                        <div class="field-radiobutton col-6">
-                            <p-radioButton id="category3" name="category" value="Electronics" [(ngModel)]="pet.category"></p-radioButton>
-                            <label for="category3">Electronics</label>
-                        </div>
-                        <div class="field-radiobutton col-6">
-                            <p-radioButton id="category4" name="category" value="Fitness" [(ngModel)]="pet.category"></p-radioButton>
-                            <label for="category4">Fitness</label>
-                        </div>
-                    </div>
+                    <label for="cep">CEP</label>
+                    <p-inputMask id="cep" mask="99.999-999" [(ngModel)]="client.cep" [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.cep}"></p-inputMask>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.cep">Cep is required.</small>
                 </div>
-
-                <div class="formgrid grid">
-                    <div class="field col">
-                        <label for="price">Price</label>
-                        <p-inputNumber id="price" [(ngModel)]="pet.price" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
-                    </div>
-                    <div class="field col">
-                        <label for="quantity">Quantity</label>
-                        <p-inputNumber id="quantity" [(ngModel)]="pet.quantity"></p-inputNumber>
-                    </div>
+                <div class="field">
+                    <label for="rua">Rua</label>
+                    <input type="text" pInputText id="" [(ngModel)]="client.rua" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.rua}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.rua">Rua is required.</small>
+                </div>
+                <div class="field">
+                    <label for="numero">Número</label>
+                    <p-inputNumber id="numero" [(ngModel)]="client.numero" mode="decimal" [useGrouping]="false"></p-inputNumber>
+                </div>
+                <div class="field">
+                    <label for="bairro">Bairro</label>
+                    <input type="text" pInputText id="bairro" [(ngModel)]="client.bairro" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.bairro}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.bairro">Bairro is required.</small>
+                </div>
+                <div class="field">
+                    <label for="cidade">Cidade</label>
+                    <input type="text" pInputText id="cidade" [(ngModel)]="client.cidade" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.cidade}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.cidade">Cidade is required.</small>
+                </div>
+                <div class="field">
+                    <label for="estado">Estado</label>
+                    <input type="text" pInputText id="estado" [(ngModel)]="client.estado" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.estado}"/>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.estado">Estado is required.</small>
+                </div>
+                <div class="field">
+                    <label for="telefone">Telefone</label>
+                    <p-inputMask id="telefone" mask="(99) 99999-9999" [(ngModel)]="client.telefone" [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.telefone}"></p-inputMask>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.telefone">Telefone is required.</small>
                 </div>
             </ng-template>
 
             <ng-template pTemplate="footer">
                 <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-                <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="savePet()"></button>
+                <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveClient()"></button>
             </ng-template>
         </p-dialog>
 
-        <p-dialog [(visible)]="deletePetDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+        <p-dialog [(visible)]="deleteClientDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
             <div class="flex align-items-center justify-content-center">
                 <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-                <span *ngIf="pet">Are you sure you want to delete <b>{{pet.name}}</b>?</span>
+                <span *ngIf="client">Você deseja deletar <b>{{client.nome}}</b>?</span>
             </div>
             <ng-template pTemplate="footer">
-                <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deletePetDialog = false"></button>
+                <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteClientDialog = false"></button>
                 <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDelete()"></button>
             </ng-template>
         </p-dialog>
 
-        <p-dialog [(visible)]="deletePetsDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+        <p-dialog [(visible)]="deleteClientsDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
             <div class="flex align-items-center justify-content-center">
                 <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-                <span>Are you sure you want to delete selected pets?</span>
+                <span>Tem certeza que deseja excluir os clientes selecionados?</span>
             </div>
             <ng-template pTemplate="footer">
-                <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deletePetsDialog = false"></button>
+                <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteClientsDialog = false"></button>
                 <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDeleteSelected()"></button>
             </ng-template>
         </p-dialog>
