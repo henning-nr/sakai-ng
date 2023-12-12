@@ -1,4 +1,4 @@
-export interface book {
+export interface Book {
     id?: string,
     key?: string,
     name?: string,

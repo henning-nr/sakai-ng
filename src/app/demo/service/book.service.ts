@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { book } from '../api/book.model';
+import { Book } from '../api/book';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
     providedIn: 'root',
 })
 export class bookService {
-    private basePath = "products"
+    private basePath = "books"
 
     constructor(private db: AngularFireDatabase) { }
 
