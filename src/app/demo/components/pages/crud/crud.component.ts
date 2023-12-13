@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Pet } from '../../../../demo/api/pet.model';
+import { Book } from '../../../../demo/api/book';
 import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
-import { PetService } from '../../../../demo/service/pet.service';
+import { BookService } from '../../../../demo/service/book.service';
 
 @Component({
     templateUrl: './crud.component.html',
@@ -10,17 +10,17 @@ import { PetService } from '../../../../demo/service/pet.service';
 })
 export class CrudComponent implements OnInit {
 
-    petDialog: boolean = false;
+    bookDialog: boolean = false;
 
-    deletePetDialog: boolean = false;
+    deleteBookDialog: boolean = false;
 
-    deletePetsDialog: boolean = false;
+    deleteBooksDialog: boolean = false;
 
-    pets: Pet[] = [];
+    books: Book[] = [];
 
-    pet: Pet = {};
+    book: Book = {};
 
-    selectedPets: Pet[] = [];
+    selectedBooks: Book[] = [];
 
     submitted: boolean = false;
 
@@ -30,89 +30,97 @@ export class CrudComponent implements OnInit {
 
     rowsPerPageOptions = [5, 10, 20];
 
-    constructor(private petService: PetService, private messageService: MessageService) { }
+    constructor(private bookService: BookService, private messageService: MessageService) { }
 
     ngOnInit() {
-        this.petService.getPets().subscribe(data => this.pets = data);
+        this.bookService.getBooks().subscribe(data => this.books = data);
 
         this.cols = [
-            { field: 'product', header: 'Pet' },
-            { field: 'price', header: 'Price' },
-            { field: 'category', header: 'Category' },
-            { field: 'rating', header: 'Reviews' },
+            { field: 'name', header: 'Name' },
+            { field: 'genre', header: 'Genre' },
+            { field: 'subgenre', header: 'Subgenre' },
+            { field: 'subgenre', header: 'Subgenre' },
+            { field: 'author', header: 'Author' },
+            { field: 'language', header: 'Langugage' },
+            { field: 'description', header: 'description' },
         ];
 
     }
 
     openNew() {
-        this.pet = {};
+        this.book = {};
         this.submitted = false;
-        this.petDialog = true;
+        this.bookDialog = true;
     }
 
-    deleteSelectedPets() {
-        this.deletePetsDialog = true;
+    deleteSelectedBooks() {
+        this.deleteBooksDialog = true;
     }
 
-    editPet(pet: Pet) {
-        this.pet = { ...pet };
-        this.petDialog = true;
+    editBook(book: Book) {
+        this.book = { ...book };
+        this.bookDialog = true;
     }
 
-    deletePet(pet: Pet) {
-        this.deletePetsDialog = true;
-        this.pet = { ...pet };
+    deleteBook(book: Book) {
+        this.deleteBookDialog = true;
+        this.book = { ...book };
     }
 
     confirmDeleteSelected() {
-        this.deletePetsDialog = false;
-        this.petService.deletePet(this.pet.key);
-        // this.pets = this.pets.filter(val => !this.petService.deletePet(val.key));
+        this.deleteBooksDialog = false;
+        this.bookService.deleteBook(this.book.key);
 
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Pets Deleted', life: 3000 });
-        this.selectedPets = [];
+        for (let book of this.selectedBooks) {
+            this.bookService.deleteBook(book.key);
+        }
+
+        // this.books = this.books.filter(val => !this.bookService.deleteBook(val.key));
+
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Books Deleted', life: 3000 });
+        this.selectedBooks = [];
     }
 
     confirmDelete() {
-        this.deletePetDialog = false;
-        // this.pets = this.pets.filter(val => val.id !== this.pet.id);
-        this.petService.deletePet(this.pet.key);
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Pet Deleted', life: 3000 });
-        this.pet = {};
+        this.deleteBookDialog = false;
+        // this.books = this.books.filter(val => val.id !== this.book.id);
+        this.bookService.deleteBook(this.book.key);
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Book Deleted', life: 3000 });
+        this.book = {};
     }
 
     hideDialog() {
-        this.petDialog = false;
+        this.bookDialog = false;
         this.submitted = false;
     }
 
-    savePet() {
+    saveBook() {
         this.submitted = true;
 
-        if (this.pet.name?.trim()) {
-            if (this.pet.id) {
+        if (this.book.name?.trim()) {
+            if (this.book.id) {
                 // @ts-ignore
-                // this.pets[this.findIndexById(this.pet.id)] = this.pet;
-                this.petService.updatePet(this.pet.key, this.pet);
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Pet Updated', life: 3000 });
+                // this.books[this.findIndexById(this.book.id)] = this.book;
+                this.bookService.updateBook(this.book.key, this.book);
+                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Book Updated', life: 3000 });
             } else {
-                this.pet.id = this.createId();
-                this.petService.createPet(this.pet);
+                this.book.id = this.createId();
+                this.bookService.createBook(this.book);
                 // @ts-ignore
                 // this.products.push(this.product);
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Pet Created', life: 3000 });
+                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Book Created', life: 3000 });
             }
 
-            this.pets = [...this.pets];
-            this.petDialog = false;
-            this.pet = {};
+            this.books = [...this.books];
+            this.bookDialog = false;
+            this.book = {};
         }
     }
 
     findIndexById(id: string): number {
         let index = -1;
-        for (let i = 0; i < this.pets.length; i++) {
-            if (this.pets[i].id === id) {
+        for (let i = 0; i < this.books.length; i++) {
+            if (this.books[i].id === id) {
                 index = i;
                 break;
             }

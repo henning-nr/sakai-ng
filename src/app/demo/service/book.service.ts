@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 @Injectable({
     providedIn: 'root',
 })
-export class bookService {
+export class BookService {
     private basePath = "books"
 
     constructor(private db: AngularFireDatabase) { }
