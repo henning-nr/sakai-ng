@@ -33,10 +33,11 @@
                         </th>
                         <th pSortableColumn="code">Code <p-sortIcon field="code"></p-sortIcon></th>
                         <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
-                        <th>Image</th>
-                        <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
-                        <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon></th>
-                        <th pSortableColumn="rating">Reviews <p-sortIcon field="rating"></p-sortIcon></th>
+                        <th pSortableColumn="genre">Genre <p-sortIcon field="genre"></p-sortIcon></th>
+                        <th pSortableColumn="subgenre">Subgenre <p-sortIcon field="subgenre"></p-sortIcon></th>
+                        <th pSortableColumn="author">Author <p-sortIcon field="author"></p-sortIcon></th>
+                        <th pSortableColumn="language">Language <p-sortIcon field="language"></p-sortIcon></th>
+                        <th pSortableColumn="description">Description <p-sortIcon field="description"></p-sortIcon></th>
                         <th></th>
                     </tr>
                 </ng-template>
@@ -97,19 +98,19 @@
 
                 <div class="field">
                     <label for="subgenre">subgenre</label>
-                    <input type="text" pInputText id="genre" [(ngModel)]="book.subgenre" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !book.subgenre}"/>
+                    <input type="text" pInputText id="subgenre" [(ngModel)]="book.subgenre" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !book.subgenre}"/>
                     <small class="ng-dirty ng-invalid" *ngIf="submitted && !book.grenre">genre is required.</small>
                 </div>
 
                 <div class="field">
                     <label for="author">author</label>
-                    <input type="text" pInputText id="genre" [(ngModel)]="book.author" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !book.author}"/>
+                    <input type="text" pInputText id="author" [(ngModel)]="book.author" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !book.author}"/>
                     <small class="ng-dirty ng-invalid" *ngIf="submitted && !book.author">author is required.</small>
                 </div>
 
                 <div class="field">
                     <label for="language">language</label>
-                    <input type="text" pInputText id="genre" [(ngModel)]="book.language" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !book.language}"/>
+                    <input type="text" pInputText id="language" [(ngModel)]="book.language" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !book.language}"/>
                     <small class="ng-dirty ng-invalid" *ngIf="submitted && !book.language">language is required.</small>
                 </div>
 
