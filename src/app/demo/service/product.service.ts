@@ -5,7 +5,9 @@ import { Product } from '../api/product';
 @Injectable()
 export class ProductService {
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+    }
+    baseUrl = 'https://ancient-troll-v9499vw6vvj2rxq-3000.app.github.dev/';
 
     getProductsSmall() {
         return this.http.get<any>('assets/demo/data/products-small.json')
@@ -15,10 +17,20 @@ export class ProductService {
     }
 
     getProducts() {
-        return this.http.get<any>('assets/demo/data/products.json')
+        return this.http.get<any>(this.baseUrl + 'products')
             .toPromise()
-            .then(res => res.data as Product[])
-            .then(data => data);
+            .then(res => {
+                return res as Product[]
+            })
+    }
+
+    addProduct(product: Product) {
+        return this.http.post<any>(this.baseUrl + 'products', product)
+            .toPromise()
+            .then(res => {
+                console.log('produto adicionado', res);
+                return res as Product
+            })
     }
 
     getProductsMixed() {
