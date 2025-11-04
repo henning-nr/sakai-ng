@@ -3,6 +3,7 @@ import { Product } from 'src/app/demo/api/product';
 import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { ProductService } from 'src/app/demo/service/product.service';
+import { tick } from '@angular/core/testing';
 
 @Component({
     templateUrl: './crud.component.html',
@@ -33,9 +34,7 @@ export class CrudComponent implements OnInit {
     constructor(private productService: ProductService, private messageService: MessageService) { }
 
     ngOnInit() {
-        this.productService.getProducts().then(data => {
-            this.products = data;
-        });
+        this.getAllProducts();
 
         this.cols = [
             { field: 'product', header: 'Product' },
@@ -50,6 +49,12 @@ export class CrudComponent implements OnInit {
             { label: 'LOWSTOCK', value: 'lowstock' },
             { label: 'OUTOFSTOCK', value: 'outofstock' }
         ];
+    }
+
+    getAllProducts() {
+        this.productService.getProducts().then(data => {
+            this.products = data;
+        });
     }
 
     openNew() {
@@ -71,17 +76,19 @@ export class CrudComponent implements OnInit {
         this.deleteProductDialog = true;
         this.product = { ...product };
     }
-
+    
     confirmDeleteSelected() {
         this.deleteProductsDialog = false;
         this.products = this.products.filter(val => !this.selectedProducts.includes(val));
         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Products Deleted', life: 3000 });
         this.selectedProducts = [];
     }
-
+    
     confirmDelete() {
         this.deleteProductDialog = false;
-        this.products = this.products.filter(val => val.id !== this.product.id);
+        this.productService.deleteProduct(this.product.id).then( () => {
+            this.getAllProducts();
+        });
         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Deleted', life: 3000 });
         this.product = {};
     }
@@ -98,7 +105,10 @@ export class CrudComponent implements OnInit {
             if (this.product.id) {
                 // @ts-ignore
                 this.product.inventoryStatus = this.product.inventoryStatus.value ? this.product.inventoryStatus.value : this.product.inventoryStatus;
-                this.products[this.findIndexById(this.product.id)] = this.product;
+                // this.products[this.findIndexById(this.product.id)] = this.product;
+                this.productService.updateProduct(this.product).then( updatedProduct => {
+                    this.getAllProducts();
+                });
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
             } else {
                 this.product.id = this.createId();
@@ -107,7 +117,7 @@ export class CrudComponent implements OnInit {
                 // @ts-ignore
                 this.product.inventoryStatus = this.product.inventoryStatus ? this.product.inventoryStatus.value : 'INSTOCK';
                 this.productService.addProduct(this.product).then( addedProduct => {
-                    this.products.push(addedProduct);
+                   this.getAllProducts();
                 });
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
             }

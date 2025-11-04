@@ -16,6 +16,7 @@ export class ProductService {
             .then(data => data);
     }
 
+    // GET DA API
     getProducts() {
         return this.http.get<any>(this.baseUrl + 'products')
             .toPromise()
@@ -24,11 +25,29 @@ export class ProductService {
             })
     }
 
+    // POST DA API
     addProduct(product: Product) {
         return this.http.post<any>(this.baseUrl + 'products', product)
             .toPromise()
             .then(res => {
                 console.log('produto adicionado', res);
+                return res as Product
+            })
+    }
+
+     // DELETE DA API
+    deleteProduct(id: any) {
+        return this.http.delete<any>(this.baseUrl + 'products'+ '/' + id)
+            .toPromise()
+            .then(res => {
+                return res as Product[]
+            })
+    }
+
+    updateProduct(product: Product) {
+        return this.http.put<any>(this.baseUrl + 'products' + '/' + product.id, product)
+            .toPromise()
+            .then(res => {
                 return res as Product
             })
     }

@@ -1,105 +1,9 @@
 {
   "products": [
     {
-      "id": "1000",
-      "code": "f230fh0g3",
-      "name": "Bamboo Watch",
-      "description": "Product Description",
-      "image": "bamboo-watch.jpg",
-      "price": 65,
-      "category": "Accessories",
-      "quantity": 24,
-      "inventoryStatus": "INSTOCK",
-      "rating": 5
-    },
-    {
-      "id": "1001",
-      "code": "nvklal433",
-      "name": "Black Watch",
-      "description": "Product Description",
-      "image": "black-watch.jpg",
-      "price": 72,
-      "category": "Accessories",
-      "quantity": 61,
-      "inventoryStatus": "OUTOFSTOCK",
-      "rating": 4
-    },
-    {
-      "id": "1002",
-      "code": "zz21cz3c1",
-      "name": "Blue Band",
-      "description": "Product Description",
-      "image": "blue-band.jpg",
-      "price": 79,
-      "category": "Fitness",
-      "quantity": 2,
-      "inventoryStatus": "LOWSTOCK",
-      "rating": 3
-    },
-    {
-      "id": "1003",
-      "code": "244wgerg2",
-      "name": "Blue T-Shirt",
-      "description": "Product Description",
-      "image": "blue-t-shirt.jpg",
-      "price": 29,
-      "category": "Clothing",
-      "quantity": 25,
-      "inventoryStatus": "INSTOCK",
-      "rating": 5
-    },
-    {
-      "id": "1004",
-      "code": "h456wer53",
-      "name": "Bracelet",
-      "description": "Product Description",
-      "image": "bracelet.jpg",
-      "price": 15,
-      "category": "Accessories",
-      "quantity": 73,
-      "inventoryStatus": "INSTOCK",
-      "rating": 4
-    },
-    {
-      "id": "1005",
-      "code": "av2231fwg",
-      "name": "Brown Purse",
-      "description": "Product Description",
-      "image": "brown-purse.jpg",
-      "price": 120,
-      "category": "Accessories",
-      "quantity": 0,
-      "inventoryStatus": "OUTOFSTOCK",
-      "rating": 4
-    },
-    {
-      "id": "1006",
-      "code": "bib36pfvm",
-      "name": "Chakra Bracelet",
-      "description": "Product Description",
-      "image": "chakra-bracelet.jpg",
-      "price": 32,
-      "category": "Accessories",
-      "quantity": 5,
-      "inventoryStatus": "LOWSTOCK",
-      "rating": 3
-    },
-    {
-      "id": "1007",
-      "code": "mbvjkgip5",
-      "name": "Galaxy Earrings",
-      "description": "Product Description",
-      "image": "galaxy-earrings.jpg",
-      "price": 34,
-      "category": "Accessories",
-      "quantity": 23,
-      "inventoryStatus": "INSTOCK",
-      "rating": 5
-    },
-    {
       "id": "1008",
       "code": "vbb124btr",
-      "name": "Game Controller",
+      "name": "Game Controller new",
       "description": "Product Description",
       "image": "game-controller.jpg",
       "price": 99,
@@ -458,200 +362,26 @@
       "id": "fzWqS",
       "code": "yUkRx",
       "image": "product-placeholder.svg"
-    }
-  ],
-  "pets": [
-    {
-      "id": "3000",
-      "name": "Bento",
-      "species": "Dog",
-      "breed": "Labrador Retriever",
-      "age": 3,
-      "gender": "M",
-      "owner": {
-        "name": "Ana Souza",
-        "contact": "+55 11 91234-5678"
-      },
-      "photo": "assets/demo/images/animals/dog-lab.jpg",
-      "vaccinated": true,
-      "adopted": true,
-      "description": "Cão energético e amigável, adora brincar e nadar."
     },
     {
-      "id": "3001",
-      "name": "Luna",
-      "species": "Cat",
-      "breed": "Siamese",
-      "age": 2,
-      "gender": "F",
-      "owner": {
-        "name": "Marcos Silva",
-        "contact": "+55 21 99876-5432"
-      },
-      "photo": "assets/demo/images/animals/cat-siamese.jpg",
-      "vaccinated": true,
-      "adopted": false,
-      "description": "Gata curiosa e afetuosa, ótima companheira para apartamento."
+      "name": "Henning Summer",
+      "description": "Meu produto",
+      "category": "Accessories",
+      "price": 50,
+      "quantity": 5,
+      "id": "AUAy9",
+      "code": "zWLHz",
+      "image": "product-placeholder.svg"
     },
     {
-      "id": "3002",
-      "name": "Pipoca",
-      "species": "Rabbit",
-      "breed": "Mini Lop",
-      "age": 1,
-      "gender": "F",
-      "owner": {
-        "name": "Refúgio São Miguel",
-        "contact": ""
-      },
-      "photo": "assets/demo/images/animals/rabbit-lop.jpg",
-      "vaccinated": false,
-      "adopted": false,
-      "description": "Coelha dócil, ótima para famílias com crianças supervisionadas."
-    },
-    {
-      "id": "3003",
-      "name": "Nino",
-      "species": "Bird",
-      "breed": "Cockatiel",
-      "age": 4,
-      "gender": "M",
-      "owner": {
-        "name": "Carlos Pereira",
-        "contact": "+55 31 98765-4321"
-      },
-      "photo": "assets/demo/images/animals/cockatiel.jpg",
-      "vaccinated": true,
-      "adopted": true,
-      "description": "Cacatua carinhosa, gosta de interagir e aprender truques."
-    },
-    {
-      "id": "3004",
-      "name": "Zeus",
-      "species": "Dog",
-      "breed": "German Shepherd",
-      "age": 5,
-      "gender": "M",
-      "owner": {
-        "name": "Lúcia Fernandes",
-        "contact": "+55 41 91234-0000"
-      },
-      "photo": "assets/demo/images/animals/dog-gsd.jpg",
-      "vaccinated": true,
-      "adopted": false,
-      "description": "Cão de guarda leal e inteligente, precisa de espaço para exercício."
-    },
-    {
-      "id": "3005",
-      "name": "Mimi",
-      "species": "Cat",
-      "breed": "Domestic Shorthair",
-      "age": 6,
-      "gender": "F",
-      "owner": {
-        "name": "Beatriz Moreira",
-        "contact": "+55 71 99988-7766"
-      },
-      "photo": "assets/demo/images/animals/cat-short.jpg",
-      "vaccinated": true,
-      "adopted": true,
-      "description": "Gata tranquila que adora dormir perto do dono."
-    },
-    {
-      "id": "3006",
-      "name": "Sushi",
-      "species": "Fish",
-      "breed": "Goldfish",
-      "age": 1,
-      "gender": "Unknown",
-      "owner": {
-        "name": "Aquarium Shop",
-        "contact": ""
-      },
-      "photo": "assets/demo/images/animals/goldfish.jpg",
-      "vaccinated": false,
-      "adopted": true,
-      "description": "Peixinho fácil de cuidar, ideal para iniciantes em aquarismo."
-    },
-    {
-      "id": "3007",
-      "name": "Thor",
-      "species": "Reptile",
-      "breed": "Bearded Dragon",
-      "age": 3,
-      "gender": "M",
-      "owner": {
-        "name": "Ricardo Alves",
-        "contact": "+55 62 91200-1234"
-      },
-      "photo": "assets/demo/images/animals/bearded-dragon.jpg",
-      "vaccinated": false,
-      "adopted": false,
-      "description": "Dragão barbudo calmo, exige terrário aquecido e cuidado específico."
-    },
-    {
-      "id": "3008",
-      "name": "Lili",
-      "species": "Guinea Pig",
-      "breed": "Abyssinian",
-      "age": 2,
-      "gender": "F",
-      "owner": {
-        "name": "Marina Costa",
-        "contact": "+55 27 98877-6655"
-      },
-      "photo": "assets/demo/images/animals/guinea-pig.jpg",
-      "vaccinated": true,
-      "adopted": true,
-      "description": "Roedor sociável que gosta de companhia e feno de qualidade."
-    },
-    {
-      "id": "3009",
-      "name": "Fiona",
-      "species": "Hamster",
-      "breed": "Syrian",
-      "age": 1,
-      "gender": "F",
-      "owner": {
-        "name": "Julia Santos",
-        "contact": "+55 11 97766-5544"
-      },
-      "photo": "assets/demo/images/animals/hamster.jpg",
-      "vaccinated": false,
-      "adopted": false,
-      "description": "Hamster ativo e curioso, adequado para cuidados em gaiola."
-    },
-    {
-      "id": "3010",
-      "name": "Kai",
-      "species": "Ferret",
-      "breed": "Domestic Ferret",
-      "age": 2,
-      "gender": "M",
-      "owner": {
-        "name": "Pedro Lima",
-        "contact": "+55 85 93333-2222"
-      },
-      "photo": "assets/demo/images/animals/ferret.jpg",
-      "vaccinated": true,
-      "adopted": false,
-      "description": "Furão brincalhão, requer supervisão e enriquecimento ambiental."
-    },
-    {
-      "id": "3011",
-      "name": "Oreo",
-      "species": "Cat",
-      "breed": "Tuxedo",
-      "age": 4,
-      "gender": "M",
-      "owner": {
-        "name": "Patrícia Gomes",
-        "contact": "+55 51 99111-0000"
-      },
-      "photo": "assets/demo/images/animals/cat-tuxedo.jpg",
-      "vaccinated": true,
-      "adopted": true,
-      "description": "Gato afetuoso e sociável, bom com crianças e outros animais."
+      "name": "novo produto",
+      "description": "testando novo",
+      "category": "Accessories",
+      "price": 50,
+      "quantity": 2,
+      "id": "HER3m",
+      "code": "HJWlL",
+      "image": "product-placeholder.svg"
     }
   ]
 }
