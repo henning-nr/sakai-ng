@@ -383,5 +383,25 @@
       "code": "HJWlL",
       "image": "product-placeholder.svg"
     }
+  ],
+  "alunos": [
+    {
+      "id": 1,
+      "nome": "Ana Silva",
+      "idade": 20,
+      "curso": "Engenharia"
+    },
+    {
+      "id": 2,
+      "nome": "Bruno Souza",
+      "idade": 22,
+      "curso": "Medicina"
+    },
+    {
+      "id": 3,
+      "nome": "Carla Pereira",
+      "idade": 19,
+      "curso": "Direito"
+    }
   ]
 }
